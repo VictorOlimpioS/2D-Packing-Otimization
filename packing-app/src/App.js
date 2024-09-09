@@ -6,7 +6,10 @@ function App() {
   const [containerWidth, setContainerWidth] = useState(0);
   const [objectHeight, setObjectHeight] = useState(0);
   const [objectWidth, setObjectWidth] = useState(0);
- 
+
+  let total = 10; // Total de blocos
+  let matriz = [8, 2]; // 8 blocos em 2 colunas e 4 linhas
+
   return (
     <div className="App">
       <header className="App-header">
@@ -58,11 +61,28 @@ function App() {
 
         <button onClick={''}>Calcular</button>
 
-        
+        <h2>Grid Resultado:</h2>
+        <div className="grid-container">
+          {/* Blocos 1 a 8 */}
+          {Array.from({ length: 8 }).map((_, idx) => (
+            <div key={idx} className="grid-item">
+              {idx + 1}
+            </div>
+          ))}
+          {/* Blocos 9 e 10 */}
+          {Array.from({ length: 2 }).map((_, idx) => (
+            <div
+              key={idx + 8}
+              className="grid-item tall-item"
+              style={{ gridRow: `${2 + (idx * 2)}/span 2`, gridColumn: '3' }}
+            >
+              {idx + 9}
+            </div>
+          ))}
+        </div>
       </header>
     </div>
   );
 }
 
 export default App;
-
