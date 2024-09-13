@@ -1,0 +1,91 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(
+    3,
+    50px
+  ); /* 3 colunas: duas para os primeiros blocos, uma para os blocos 9 e 10 */
+  grid-template-rows: repeat(4, 50px); /* 4 linhas: para os blocos 1 a 8 */
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.grid-item {
+  width: 50px;
+  height: 50px;
+  background-color: #1e90ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  border: 1px solid #fff;
+}
+
+.tall-item {
+  /* Esses itens ocupam 2 linhas e estão na terceira coluna */
+}
+
+label {
+  margin: 10px 0;
+}
+
+input {
+  margin-left: 10px;
+  padding: 5px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.container-principal {
+  background-color: gray;
+  width: 500px; /*variavel: definido pela entrada*/
+  height: 700px; /*variavel: definido pela entrada*/
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-bottom: 100px;
+}
+
+.layout-principal {
+  display: flex;
+  flex-wrap: wrap;
+  width: 400px; /* número de linhas do layout principal * largura do item */
+  height: 700px; /* número de colunas  do layout principal * altura do item */
+}
+
+.layout-complementar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100px; /* número de linhas  do layout complementar * largura do item */
+  height: 600px; /* número de colunas  do layout complementar * altura do item */
+}
+
+.layout-principal .item {
+  width: 200px; /*variavel: definido pela entrada*/
+  height: 100px; /*variavel: definido pela entrada*/
+  background-color: #1e90ff;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+}
+
+.item-complementar {
+  width: 100px; /*variavel: definido pelo valor invertido da entrada*/
+  height: 200px; /*variavel: definido pelo valor invertido da entrada*/
+  background-color: #1e90ff;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+}
