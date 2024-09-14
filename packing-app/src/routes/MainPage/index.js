@@ -41,11 +41,11 @@ export const MainLayout = styled.div`
   flex-wrap: wrap;
   width: ${(props) =>
     `${cmToPx(
-      props.$mainLayoutwidth
+      props.$mainlayoutwidth
     )}px`}; /* número de linhas * largura do item */
   height: ${(props) =>
     `${cmToPx(
-      props.$mainLayoutheight
+      props.$mainlayoutheight
     )}px`}; /* número de colunas * altura do item */
 `;
 
@@ -55,11 +55,11 @@ export const ExtraLayout = styled.div`
   flex-wrap: wrap;
   width: ${(props) =>
     `${cmToPx(
-      props.$extraLayoutwidth
+      props.$extralayoutwidth
     )}px`}; /* número de linhas * largura do item */
   height: ${(props) =>
     `${cmToPx(
-      props.$extraLayoutheight
+      props.$extralayoutheight
     )}px`}; /* número de colunas * altura do item */
 `;
 
@@ -86,54 +86,54 @@ export const ExtraItem = styled.div`
 `;
 
 export const MainPage = () => {
-  // const [formData, setFormData] = useState({
-  //   containerHeight: 0,
-  //   containerWidth: 0,
-  //   itemWidth: 0,
-  //   itemHeight: 0,
-  // });
+  const [formData, setFormData] = useState({
+    containerHeight: 0,
+    containerWidth: 0,
+    itemWidth: 0,
+    itemHeight: 0,
+  });
 
   // const [result, setResult] = useState({});
 
-  // const handleFormSubmit = (data) => {
-  //   setFormData(data);
-  //   // if (formData) {
-  //   //   setResult(
-  //   //     twoDPackingOptimization(
-  //   //       parseFloat(formData.containerHeight),
-  //   //       parseFloat(formData.containerWidth),
-  //   //       parseFloat(formData.itemHeight),
-  //   //       parseFloat(formData.itemWidth)
-  //   //     )
-  //   //   );
-  //   // }
-  // };
-  const formData = {
-    containerHeight: 130,
-    containerWidth: 130,
-    itemWidth: 30,
-    itemHeight: 50,
+  const handleFormSubmit = (data) => {
+    setFormData(data);
+    // if (formData) {
+    //   setResult(
+    //     twoDPackingOptimization(
+    //       parseFloat(formData.containerHeight),
+    //       parseFloat(formData.containerWidth),
+    //       parseFloat(formData.itemHeight),
+    //       parseFloat(formData.itemWidth)
+    //     )
+    //   );
+    // }
   };
+  // const formData = {
+  //   containerHeight: 130,
+  //   containerWidth: 130,
+  //   itemWidth: 30,
+  //   itemHeight: 50,
+  // };
 
   const result = {
     max: 10,
     mainLayout: {
       distribution: {
-        height: 2,
-        width: 4,
+        height: 4,
+        width: 2,
       },
-      layoutHeight: 100,
-      layoutWidth: 120,
+      layoutHeight: 120,
+      layoutWidth: 100,
       itemHeight: 30,
       itemWidth: 50,
     },
     extraLayout: {
       distribution: {
-        height: 2,
-        width: 1,
+        height: 1,
+        width: 2,
       },
-      layoutHeight: 30,
-      layoutWidth: 100,
+      layoutHeight: 100,
+      layoutWidth: 30,
       itemHeight: 50,
       itemWidth: 30,
     },
@@ -142,7 +142,7 @@ export const MainPage = () => {
   console.log("Dados recebidos do formulário:", result);
   return (
     <PageContainer>
-      {/* <Form onFormSubmit={handleFormSubmit} /> */}
+      <Form onFormSubmit={handleFormSubmit} />
 
       <MainContainer
         $containerheight={formData.containerHeight}
