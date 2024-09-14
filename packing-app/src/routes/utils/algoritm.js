@@ -141,8 +141,8 @@ export default function twoDPackingOptimization(
           distribution: matrixResult,
           layoutHeight: matrixResult.height * objectWidth,
           layoutWidth: matrixResult.width * objectHeight,
-          itemHeight: objectHeight,
-          itemWidth: objectWidth,
+          itemHeight: objectWidth,
+          itemWidth: objectHeight,
         },
         extraLayout: {
           distribution: layoutComplementMatrix,
@@ -169,8 +169,8 @@ export default function twoDPackingOptimization(
           distribution: matrixResult,
           layoutHeight: matrixResult.height * objectWidth,
           layoutWidth: matrixResult.width * objectHeight,
-          itemHeight: objectHeight,
-          itemWidth: objectWidth,
+          itemHeight: objectWidth,
+          itemWidth: objectHeight,
         },
         extraLayout: {
           distribution: layoutComplementMatrix,
@@ -190,8 +190,8 @@ export default function twoDPackingOptimization(
           distribution: matrixResult,
           layoutHeight: matrixResult.height * objectWidth,
           layoutWidth: matrixResult.width * objectHeight,
-          itemHeight: objectHeight,
-          itemWidth: objectWidth,
+          itemHeight: objectWidth,
+          itemWidth: objectHeight,
         },
       };
     }
