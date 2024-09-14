@@ -15,6 +15,7 @@ export const PageContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
 function cmToPx(cm, ppi = 12) {
   return Math.round((cm / 2.54) * ppi);
 }
@@ -23,9 +24,9 @@ function cmToPx(cm, ppi = 12) {
 export const MainContainer = styled.div`
   background-color: gray;
   width: ${(props) =>
-    `${cmToPx(props.containerwidth)}px`}; /* Variável definida pela entrada */
+    `${cmToPx(props.$containerwidth)}px`}; /* Variável definida pela entrada */
   height: ${(props) =>
-    `${cmToPx(props.containerheight)}px`}; /* Variável definida pela entrada */
+    `${cmToPx(props.$containerheight)}px`}; /* Variável definida pela entrada */
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -85,27 +86,33 @@ export const ExtraItem = styled.div`
 `;
 
 export const MainPage = () => {
-  const [formData, setFormData] = useState({
-    containerHeight: 0,
-    containerWidth: 0,
-    itemWidth: 0,
-    itemHeight: 0,
-  });
+  // const [formData, setFormData] = useState({
+  //   containerHeight: 0,
+  //   containerWidth: 0,
+  //   itemWidth: 0,
+  //   itemHeight: 0,
+  // });
 
   // const [result, setResult] = useState({});
 
-  const handleFormSubmit = (data) => {
-    setFormData(data);
-    // if (formData) {
-    //   setResult(
-    //     twoDPackingOptimization(
-    //       parseFloat(formData.containerHeight),
-    //       parseFloat(formData.containerWidth),
-    //       parseFloat(formData.itemHeight),
-    //       parseFloat(formData.itemWidth)
-    //     )
-    //   );
-    // }
+  // const handleFormSubmit = (data) => {
+  //   setFormData(data);
+  //   // if (formData) {
+  //   //   setResult(
+  //   //     twoDPackingOptimization(
+  //   //       parseFloat(formData.containerHeight),
+  //   //       parseFloat(formData.containerWidth),
+  //   //       parseFloat(formData.itemHeight),
+  //   //       parseFloat(formData.itemWidth)
+  //   //     )
+  //   //   );
+  //   // }
+  // };
+  const formData = {
+    containerHeight: 130,
+    containerWidth: 130,
+    itemWidth: 30,
+    itemHeight: 50,
   };
 
   const result = {
@@ -117,60 +124,62 @@ export const MainPage = () => {
       },
       layoutHeight: 100,
       layoutWidth: 120,
-      itemHeight: 50,
-      itemWidth: 30,
+      itemHeight: 30,
+      itemWidth: 50,
     },
     extraLayout: {
       distribution: {
-        height: 1,
-        width: 2,
+        height: 2,
+        width: 1,
       },
       layoutHeight: 30,
       layoutWidth: 100,
-      itemHeight: 30,
-      itemWidth: 50,
+      itemHeight: 50,
+      itemWidth: 30,
     },
   };
 
   console.log("Dados recebidos do formulário:", result);
   return (
     <PageContainer>
-      <Form onFormSubmit={handleFormSubmit} />
-      {true ? (
-        <MainContainer
-          $containerheight={formData.containerHeight}
-          $containerwidth={formData.containerWidth}
+      {/* <Form onFormSubmit={handleFormSubmit} /> */}
+
+      <MainContainer
+        $containerheight={formData.containerHeight}
+        $containerwidth={formData.containerWidth}
+      >
+        <MainLayout
+          $mainlayoutheight={result.mainLayout.layoutHeight}
+          $mainlayoutwidth={result.mainLayout.layoutWidth}
         >
-          <MainLayout
-            $mainlayoutheight={result.mainLayout.layoutHeight}
-            $mainlayoutwidth={result.mainLayout.layoutWidth}
-          >
-            {Array.from({
-              length:
-                result?.distribution?.height * result?.distribution?.height,
-            }).map((_) => (
-              <MainItem
-                $mainitemheight={result.mainLayout.itemHeight}
-                $mainitemwidth={result.mainLayout.itemWidth}
-              ></MainItem>
-            ))}
-          </MainLayout>
-          <ExtraLayout
-            $extralayoutheight={result.extraLayout.layoutHeight}
-            $extralayoutwidth={result.extraLayout.layoutWidth}
-          >
-            {Array.from({
-              length:
-                result?.distribution?.height * result?.distribution?.height,
-            }).map((_) => (
-              <ExtraItem
-                $extraitemheight={result.extraLayout.itemHeight}
-                $extraitemwidth={result.extraLayout.itemWidth}
-              ></ExtraItem>
-            ))}
-          </ExtraLayout>
-        </MainContainer>
-      ) : (
+          {Array.from({
+            length:
+              result?.mainLayout?.distribution?.height *
+              result?.mainLayout?.distribution?.width,
+          }).map((_) => (
+            <MainItem
+              $mainitemheight={result.mainLayout.itemHeight}
+              $mainitemwidth={result.mainLayout.itemWidth}
+            ></MainItem>
+          ))}
+        </MainLayout>
+        <ExtraLayout
+          $extralayoutheight={result.extraLayout.layoutHeight}
+          $extralayoutwidth={result.extraLayout.layoutWidth}
+        >
+          {Array.from({
+            length:
+              result?.extraLayout?.distribution?.height *
+              result?.extraLayout?.distribution?.width,
+          }).map((_) => (
+            <ExtraItem
+              $extraitemheight={result.extraLayout.itemHeight}
+              $extraitemwidth={result.extraLayout.itemWidth}
+            ></ExtraItem>
+          ))}
+        </ExtraLayout>
+      </MainContainer>
+      {/* ) : (
         <Box
           sx={{
             display: "flex",
@@ -180,7 +189,7 @@ export const MainPage = () => {
         >
           <CircularProgress />
         </Box>
-      )}
+      )} */}
     </PageContainer>
   );
 };
