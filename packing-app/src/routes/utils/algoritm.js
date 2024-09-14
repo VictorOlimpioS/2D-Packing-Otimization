@@ -4,6 +4,8 @@ export default function twoDPackingOptimization(
   objectHeight,
   objectWidth
 ) {
+  console.log("CONT==>", containerHeight);
+
   // Tratando restrições de tamanho do item em relação ao container
   if (
     (objectHeight > containerHeight && objectHeight > containerWidth) ||
@@ -53,16 +55,24 @@ export default function twoDPackingOptimization(
 
       totalResult = layout1 + layoutComplement;
       matrixResult = layoutMatrix1;
-      console.log(
-        "Total de objetos: ",
-        totalResult,
-        "\nLayout 1--> ",
-        matrixResult,
-        "Altura do objeto paralela a altura da caixa\n",
-        "Layout complementar--> ",
-        layoutComplementMatrix,
-        " Posição do item contrária à orientação do layout 1"
-      );
+
+      return {
+        max: totalResult,
+        mainLayout: {
+          distribution: matrixResult,
+          layoutHeight: matrixResult.height * objectHeight,
+          layoutWidth: matrixResult.width * objectWidth,
+          itemHeight: objectHeight,
+          itemWidth: objectWidth,
+        },
+        extraLayout: {
+          distribution: layoutComplementMatrix,
+          layoutHeight: layoutComplementMatrix.height * objectWidth,
+          layoutWidth: layoutComplementMatrix.width * objectHeight,
+          itemHeight: objectWidth,
+          itemWidth: objectHeight,
+        },
+      };
     } else if (objectHeight <= widthBoxes) {
       let newLayout = Math.floor(widthBoxes / objectHeight);
       let layoutComplement = Math.floor(containerHeight / objectWidth);
@@ -73,26 +83,37 @@ export default function twoDPackingOptimization(
 
       totalResult = layout1 + layoutComplement;
       matrixResult = layoutMatrix1;
-      console.log(
-        "Total de objetos: ",
-        totalResult,
-        "\nLayout 1--> ",
-        matrixResult,
-        "Altura do objeto paralela a altura da caixa\n",
-        "Layout complementar--> ",
-        layoutComplementMatrix,
-        " Posição do item contrária à orientação do layout 1"
-      );
+      return {
+        max: totalResult,
+        mainLayout: {
+          distribution: matrixResult,
+          layoutHeight: matrixResult.height * objectHeight,
+          layoutWidth: matrixResult.width * objectWidth,
+          itemHeight: objectHeight,
+          itemWidth: objectWidth,
+        },
+        extraLayout: {
+          distribution: layoutComplementMatrix,
+          layoutHeight: layoutComplementMatrix.height * objectWidth,
+          layoutWidth: layoutComplementMatrix.width * objectHeight,
+          itemHeight: objectWidth,
+          itemWidth: objectHeight,
+        },
+      };
     } else {
       totalResult = layout1;
       matrixResult = layoutMatrix1;
-      console.log(
-        "Total de objetos: ",
-        totalResult,
-        "\nLayout 1--> ",
-        matrixResult,
-        "Altura do objeto paralela a altura da caixa"
-      );
+
+      return {
+        max: totalResult,
+        mainLayout: {
+          distribution: matrixResult,
+          layoutHeight: matrixResult.height * objectHeight,
+          layoutWidth: matrixResult.width * objectWidth,
+          itemHeight: objectHeight,
+          itemWidth: objectWidth,
+        },
+      };
     }
   } else {
     let layoutMatrix2 = {
@@ -113,16 +134,24 @@ export default function twoDPackingOptimization(
 
       totalResult = layout2 + layoutComplement;
       matrixResult = layoutMatrix2;
-      console.log(
-        "Total de objetos: ",
-        totalResult,
-        "\nLayout 2--> ",
-        matrixResult,
-        "Altura do objeto perpendicular a altura da caixa\n",
-        "Layout complementar--> ",
-        layoutComplementMatrix,
-        " Posição do item contrária à orientação do layout 2"
-      );
+
+      return {
+        max: totalResult,
+        mainLayout: {
+          distribution: matrixResult,
+          layoutHeight: matrixResult.height * objectWidth,
+          layoutWidth: matrixResult.width * objectHeight,
+          itemHeight: objectHeight,
+          itemWidth: objectWidth,
+        },
+        extraLayout: {
+          distribution: layoutComplementMatrix,
+          layoutHeight: layoutComplementMatrix.height * objectHeight,
+          layoutWidth: layoutComplementMatrix.width * objectWidth,
+          itemHeight: objectHeight,
+          itemWidth: objectWidth,
+        },
+      };
     } else if (objectWidth <= widthBoxes) {
       let newLayout = Math.floor(widthBoxes / objectWidth);
       let layoutComplement = Math.floor(containerHeight / objectHeight);
@@ -133,26 +162,38 @@ export default function twoDPackingOptimization(
 
       totalResult = layout2 + layoutComplement;
       matrixResult = layoutMatrix2;
-      console.log(
-        "Total de objetos: ",
-        totalResult,
-        "\nLayout 2--> ",
-        matrixResult,
-        "Altura do objeto perpendicular a altura da caixa\n",
-        "Layout complementar--> ",
-        layoutComplementMatrix,
-        " Posição do item contrária à orientação do layout 2"
-      );
+
+      return {
+        max: totalResult,
+        mainLayout: {
+          distribution: matrixResult,
+          layoutHeight: matrixResult.height * objectWidth,
+          layoutWidth: matrixResult.width * objectHeight,
+          itemHeight: objectHeight,
+          itemWidth: objectWidth,
+        },
+        extraLayout: {
+          distribution: layoutComplementMatrix,
+          layoutHeight: layoutComplementMatrix.height * objectHeight,
+          layoutWidth: layoutComplementMatrix.width * objectWidth,
+          itemHeight: objectHeight,
+          itemWidth: objectWidth,
+        },
+      };
     } else {
       totalResult = layout2;
       matrixResult = layoutMatrix2;
-      console.log(
-        "Total de objetos: ",
-        totalResult,
-        "\nLayout 2--> ",
-        matrixResult,
-        "Altura do objeto perpendicular a altura da caixa"
-      );
+
+      return {
+        max: totalResult,
+        mainLayout: {
+          distribution: matrixResult,
+          layoutHeight: matrixResult.height * objectWidth,
+          layoutWidth: matrixResult.width * objectHeight,
+          itemHeight: objectHeight,
+          itemWidth: objectWidth,
+        },
+      };
     }
   }
 }
