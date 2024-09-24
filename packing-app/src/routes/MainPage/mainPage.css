@@ -1,3 +1,7 @@
+body{
+  background-color: #FAD13A;
+}
+
 .App {
   text-align: center;
   min-height: 100vh;
@@ -9,10 +13,7 @@
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(
-    3,
-    50px
-  ); /* 3 colunas: duas para os primeiros blocos, uma para os blocos 9 e 10 */
+  grid-template-columns: repeat(3,50px); /* 3 colunas: duas para os primeiros blocos, uma para os blocos 9 e 10 */
   grid-template-rows: repeat(4, 50px); /* 4 linhas: para os blocos 1 a 8 */
   gap: 5px;
   margin-top: 20px;
@@ -25,13 +26,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: #E8F0FE;
   font-size: 20px;
-  border: 1px solid #fff;
+  border: 1px solid #E8F0FE;
 }
 
 .tall-item {
   /* Esses itens ocupam 2 linhas e estão na terceira coluna */
+}
+
+.title-logo-container{
+  display: flex;
+  align-items: center;
+  text-align: left;
+  border-top: 5px solid black;
+  border-bottom: 5px solid black;
+  margin-bottom: 70px
 }
 
 label {
@@ -48,6 +58,31 @@ button {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+}
+
+section{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.image-container{
+  border: 5px solid black;
+  border-radius: 15px;
+  padding: 20px;
+  display: inline-block;
+  margin-right: 100px;
+  background-color: #E8F0FE;
+}
+
+img{
+  width: 100px;
+  height: 100px;
+  padding: 15px;
+}
+
+h1 {
+  font-size: 40px;
 }
 
 .container-principal {
@@ -74,11 +109,11 @@ button {
   height: 600px; /* número de colunas  do layout complementar * altura do item */
 }
 
-.layout-principal .item {
+.layout-principal .main-item {
   width: 200px; /*variavel: definido pela entrada*/
   height: 100px; /*variavel: definido pela entrada*/
-  background-color: #1e90ff;
-  border: 1px solid #fff;
+  background-color: #E8F0FE;
+  border: 1px solid #FAD13A;
   box-sizing: border-box;
 }
 

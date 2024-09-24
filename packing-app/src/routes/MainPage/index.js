@@ -4,9 +4,10 @@ import Form from "../Form/index";
 import twoDPackingOptimization from "../utils/algoritm.js";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import image from "../../assets/logo2.png";
 
 import styled from "styled-components";
-import { Card, Typography, CardContent } from "@mui/material";
+import { Card, Typography, CardContent, Box } from "@mui/material";
 
 // Estilos para a App
 export const PageContainer = styled.div`
@@ -32,8 +33,7 @@ export const MainContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  margin-bottom: 100px;
-  border: 4px solid #00009c;
+  border: 5px solid #000;
   border-radius: 5px;
 `;
 
@@ -71,8 +71,8 @@ export const MainItem = styled.div`
     `${2.5 * props.$mainitemwidth}px`}; /* Variável definida pela entrada */
   height: ${(props) =>
     `${2.5 * props.$mainitemheight}px`}; /* Variável definida pela entrada */
-  background-color: #1e90ff;
-  border: 1px solid #fff;
+  background-color: #fad13a;
+  border: 1px solid #e8f0fe;
   box-sizing: border-box;
 `;
 
@@ -82,8 +82,8 @@ export const ExtraItem = styled.div`
     `${2.5 * props.$extraitemwidth}px`}; /* Variável invertida da entrada */
   height: ${(props) =>
     `${2.5 * props.$extraitemheight}px`}; /* Variável invertida da entrada */
-  background-color: #1e90ff;
-  border: 1px solid #fff;
+  background-color: #fad13a;
+  border: 1px solid #e8f0fe;
   box-sizing: border-box;
 `;
 
@@ -146,118 +146,158 @@ export const MainPage = () => {
     }
   };
 
-  // const formData = {
-  //   containerHeight: 130,
-  //   containerWidth: 130,
-  //   itemWidth: 30,
-  //   itemHeight: 50,
-  // };
-
-  // const result = {
-  //   max: 10,
-  //   mainLayout: {
-  //     distribution: {
-  //       height: 2,
-  //       width: 4,
-  //     },
-  //     layoutHeight: 100,
-  //     layoutWidth: 120,
-  //     itemHeight: 50,
-  //     itemWidth: 30,
-  //   },
-  //   extraLayout: {
-  //     distribution: {
-  //       height: 1,
-  //       width: 2,
-  //     },
-  //     layoutHeight: 30,
-  //     layoutWidth: 100,
-  //     itemHeight: 30,
-  //     itemWidth: 50,
-  //   },
-  // };
-
   console.log("Dados recebidos do formulário:", result);
   return (
-    <PageContainer>
-      <Form onFormSubmit={handleFormSubmit} />
-      <div ref={printRef} style={{ padding: "64px" }}>
-        <Card variant="outlined" style={{ margin: "12px" }}>
-          <CardContent>
-            <Typography variant="h5" component="div">
-              Total de Itens: {result?.max}
-            </Typography>
-          </CardContent>
-        </Card>
-
-        <MainContainer
-          $containerheight={formData?.containerHeight}
-          $containerwidth={formData?.containerWidth}
+    <PageContainer style={{ padding: "40px", backgroundColor: "#FAD13A" }}>
+      <header>
+        <div className="title-logo-container">
+          <Typography component="h1" variant="h1" gutterBottom>
+            EMPACOTAMENTO INTELIGENTE
+          </Typography>
+          <div className="image-container">
+            <img src={image} alt="" />
+          </div>
+        </div>
+      </header>
+      <section>
+        <Form onFormSubmit={handleFormSubmit} />
+        <div
+          ref={printRef}
+          style={{
+            padding: "64px",
+            backgroundColor: "#E8F0FE",
+            border: "5px solid black",
+            borderRadius: "15px",
+          }}
         >
+          <Card
+            variant="outlined"
+            style={{ margin: "12px 0" }}
+            sx={{
+              backgroundColor: "#FAD13A",
+              width: "380px",
+              border: "5px solid black",
+              borderRadius: "15px",
+            }}
+          >
+            <CardContent sx={{padding: "16px !important"}}>
+              <Typography variant="h5" component="div">
+                Total de Itens: {result?.max ?? "--"}
+              </Typography>
+            </CardContent>
+          </Card>
+
           {!result ? (
             <Card
               variant="outlined"
               style={{
-                margin: "12px",
+                margin: "12px 0",
                 justifyContent: "center",
                 alignItems: "center",
                 display: "flex",
               }}
             >
-              <CardContent>
+              <CardContent sx={{backgroundColor: "#fad13a", border: "5px solid black", borderRadius: "15px", width: "380px", padding: "16px 0 !important"}}>
                 <Typography variant="h5" component="div">
                   OBJETO NÃO COMPORTADO
                 </Typography>
               </CardContent>
             </Card>
           ) : (
-            <>
-              <MainLayout
-                $mainlayoutheight={result?.mainLayout?.layoutHeight}
-                $mainlayoutwidth={result?.mainLayout?.layoutWidth}
-              >
-                {Array.from({
-                  length:
-                    result?.mainLayout?.distribution?.height *
-                    result?.mainLayout?.distribution?.width,
-                }).map((_) => (
-                  <MainItem
-                    $mainitemheight={result?.mainLayout?.itemHeight}
-                    $mainitemwidth={result?.mainLayout?.itemWidth}
-                  ></MainItem>
-                ))}
-              </MainLayout>
-              <ExtraLayout
-                $extralayoutheight={result?.extraLayout?.layoutHeight}
-                $extralayoutwidth={result?.extraLayout?.layoutWidth}
-              >
-                {Array.from({
-                  length:
-                    result?.extraLayout?.distribution?.height *
-                    result?.extraLayout?.distribution?.width,
-                }).map((_) => (
-                  <ExtraItem
-                    $extraitemheight={result?.extraLayout?.itemHeight}
-                    $extraitemwidth={result?.extraLayout?.itemWidth}
-                  ></ExtraItem>
-                ))}
-              </ExtraLayout>
-            </>
+			result?.max &&
+				<>
+            <MainContainer
+              $containerheight={formData?.containerHeight}
+              $containerwidth={formData?.containerWidth}
+            >
+                <MainLayout
+                  $mainlayoutheight={result?.mainLayout?.layoutHeight}
+                  $mainlayoutwidth={result?.mainLayout?.layoutWidth}
+                >
+                  {Array.from({
+                    length:
+                      result?.mainLayout?.distribution?.height *
+                      result?.mainLayout?.distribution?.width,
+                  }).map((_) => (
+                    <MainItem
+                      style={{ position: "relative" }}
+                      $mainitemheight={result?.mainLayout?.itemHeight}
+                      $mainitemwidth={result?.mainLayout?.itemWidth}
+                    >
+                      <span
+                        style={{
+                          position: "absolute",
+                          top: "0",
+                          left: "45%",
+                          width: "10%",
+                          height: "10%",
+                          paddingTop: "5px",
+                        }}
+                      >
+                        {result?.mainLayout?.itemWidth}
+                      </span>
+                      <span
+                        style={{
+                          position: "absolute",
+                          top: "45%",
+                          left: "0",
+                          width: "10%",
+                          height: "10%",
+                          paddingLeft: "5px",
+                        }}
+                      >
+                        {result?.mainLayout?.itemHeight}
+                      </span>
+                    </MainItem>
+                  ))}
+                </MainLayout>
+                <ExtraLayout
+                  $extralayoutheight={result?.extraLayout?.layoutHeight}
+                  $extralayoutwidth={result?.extraLayout?.layoutWidth}
+                >
+                  {Array.from({
+                    length:
+                      result?.extraLayout?.distribution?.height *
+                      result?.extraLayout?.distribution?.width,
+                  }).map((_) => (
+                    <ExtraItem
+                      style={{ position: "relative" }}
+                      $extraitemheight={result?.extraLayout?.itemHeight}
+                      $extraitemwidth={result?.extraLayout?.itemWidth}
+                    >
+                      <span
+                        style={{
+                          position: "absolute",
+                          top: "0",
+                          left: "45%",
+                          width: "10%",
+                          height: "10%",
+                          paddingTop: "5px",
+                        }}
+                      >
+                        {result?.extraLayout?.itemWidth}
+                      </span>
+                      <span
+                        style={{
+                          position: "absolute",
+                          top: "45%",
+                          left: "0",
+                          width: "10%",
+                          height: "10%",
+                          paddingLeft: "5px",
+                        }}
+                      >
+                        {result?.extraLayout?.itemHeight}
+                      </span>
+                    </ExtraItem>
+                  ))}
+                </ExtraLayout>
+            </MainContainer>
+			</>
           )}
-        </MainContainer>
-      </div>
+        </div>
+      </section>
       <button onClick={generatePDF}>Baixar como PDF</button>
-      {/* ) : (
-        <Box
-          sx={{
-            display: "flex",
-            width: "fit-content",
-            height: "fit-content",
-          }}
-        >
-          <CircularProgress />
-        </Box>
-      )} */}
     </PageContainer>
   );
 };

@@ -1,0 +1,38 @@
+.form-container{
+  width: 300px;
+  min-width: 300px;
+  background-color: #E8F0FE;
+  border: 5px solid black;
+  border-radius: 15px;
+  max-height: 526px;
+}
+
+.custom-textfield{
+  font-weight: 500;
+}
+
+.custom-textfield label.Mui-focused {
+  color: black; /* Cor do rótulo quando o campo está focado */
+  font-weight: 500;
+}
+
+.custom-textfield label {
+  color: black; /* Cor do rótulo quando o campo está focado */
+  font-weight: 500;
+}
+
+.custom-textfield .MuiOutlinedInput-root {
+  /* Estilo da borda */
+  fieldset {
+    border: black 5px solid; /* Cor da borda padrão */
+  }
+}
+
+.custom-textfield .MuiOutlinedInput-root:hover fieldset {
+  /* Estilo da borda ao passar o mouse */
+  border: black 5px solid; /* Cor da borda ao hover */
+}
+
+.custom-textfield .MuiOutlinedInput-root.Mui-focused fieldset {
+  border: black 5px solid; /* Cor da borda ao focar */
+}

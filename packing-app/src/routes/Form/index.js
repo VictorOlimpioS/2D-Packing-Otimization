@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./form.css";
 import {
   TextField,
   Button,
@@ -30,7 +31,7 @@ export const Form = ({ onFormSubmit }) => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <section className="form-container">
       <Box
         sx={{
           marginTop: 8,
@@ -39,8 +40,8 @@ export const Form = ({ onFormSubmit }) => {
           alignItems: "center",
         }}
       >
-        <Typography component="h1" variant="h5">
-          Formulário de Cadastro
+        <Typography component="h2" variant="h5">
+          Valores de Entrada:
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid2
@@ -51,6 +52,7 @@ export const Form = ({ onFormSubmit }) => {
           >
             <Grid2 item xs={12}>
               <TextField
+              className="custom-textfield"
                 variant="outlined"
                 margin="dense"
                 required
@@ -62,10 +64,12 @@ export const Form = ({ onFormSubmit }) => {
                 autoFocus
                 value={formData.containerHeight}
                 onChange={handleChange}
+                type="number"
               />
             </Grid2>
             <Grid2 item xs={12}>
               <TextField
+              className="custom-textfield"
                 variant="outlined"
                 margin="dense"
                 required
@@ -77,10 +81,12 @@ export const Form = ({ onFormSubmit }) => {
                 autoFocus
                 value={formData.containerWidth}
                 onChange={handleChange}
+                type="number"
               />
             </Grid2>
             <Grid2 item xs={12}>
               <TextField
+              className="custom-textfield"
                 variant="outlined"
                 margin="dense"
                 required
@@ -92,10 +98,12 @@ export const Form = ({ onFormSubmit }) => {
                 autoFocus
                 value={formData.itemHeight}
                 onChange={handleChange}
+                type="number"
               />
             </Grid2>
             <Grid2 item xs={12}>
               <TextField
+                className="custom-textfield"
                 variant="outlined"
                 margin="dense"
                 required
@@ -107,6 +115,7 @@ export const Form = ({ onFormSubmit }) => {
                 autoFocus
                 value={formData.itemWidth}
                 onChange={handleChange}
+                type="number"
               />
             </Grid2>
           </Grid2>
@@ -115,13 +124,13 @@ export const Form = ({ onFormSubmit }) => {
             type="submit"
             variant="contained"
             color="primary"
-            sx={{ mt: 2, mb: 2 }}
+            sx={{ mt: 2, mb: 2, backgroundColor: "#000", borderRadius: "5px", padding: "10px 20px"}}
           >
             Gerar Mapa
           </Button>
         </Box>
       </Box>
-    </Container>
+    </section>
   );
 };
 
