@@ -7,7 +7,7 @@ import jsPDF from "jspdf";
 import image from "../../assets/logo2.png";
 
 import styled from "styled-components";
-import { Card, Typography, CardContent, Box } from "@mui/material";
+import { Card, Typography, CardContent, Box, Button } from "@mui/material";
 
 // Estilos para a App
 export const PageContainer = styled.div`
@@ -160,7 +160,24 @@ export const MainPage = () => {
         </div>
       </header>
       <section>
-        <Form onFormSubmit={handleFormSubmit} />
+		<Box sx={{display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center", marginRight: "30px"}}>
+			<Form onFormSubmit={handleFormSubmit} />
+
+				<Button
+					onClick={generatePDF}
+					sx={{
+					mt: 2,
+					mb: 2,
+					backgroundColor: "#000",
+					borderRadius: "5px",
+					padding: "10px 20px",
+					color: "#E8F0FE",
+					}}
+				>
+					Baixar como PDF
+				</Button>
+
+		</Box>
         <div
           ref={printRef}
           style={{
@@ -180,7 +197,7 @@ export const MainPage = () => {
               borderRadius: "15px",
             }}
           >
-            <CardContent sx={{padding: "16px !important"}}>
+            <CardContent sx={{ padding: "16px !important" }}>
               <Typography variant="h5" component="div">
                 Total de Itens: {result?.max ?? "--"}
               </Typography>
@@ -197,107 +214,113 @@ export const MainPage = () => {
                 display: "flex",
               }}
             >
-              <CardContent sx={{backgroundColor: "#fad13a", border: "5px solid black", borderRadius: "15px", width: "380px", padding: "16px 0 !important"}}>
+              <CardContent
+                sx={{
+                  backgroundColor: "#fad13a",
+                  border: "5px solid black",
+                  borderRadius: "15px",
+                  width: "380px",
+                  padding: "16px 0 !important",
+                }}
+              >
                 <Typography variant="h5" component="div">
                   OBJETO NÃO COMPORTADO
                 </Typography>
               </CardContent>
             </Card>
           ) : (
-			result?.max &&
-				<>
-            <MainContainer
-              $containerheight={formData?.containerHeight}
-              $containerwidth={formData?.containerWidth}
-            >
-                <MainLayout
-                  $mainlayoutheight={result?.mainLayout?.layoutHeight}
-                  $mainlayoutwidth={result?.mainLayout?.layoutWidth}
+            result?.max && (
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <MainContainer
+                  $containerheight={formData?.containerHeight}
+                  $containerwidth={formData?.containerWidth}
                 >
-                  {Array.from({
-                    length:
-                      result?.mainLayout?.distribution?.height *
-                      result?.mainLayout?.distribution?.width,
-                  }).map((_) => (
-                    <MainItem
-                      style={{ position: "relative" }}
-                      $mainitemheight={result?.mainLayout?.itemHeight}
-                      $mainitemwidth={result?.mainLayout?.itemWidth}
-                    >
-                      <span
-                        style={{
-                          position: "absolute",
-                          top: "0",
-                          left: "45%",
-                          width: "10%",
-                          height: "10%",
-                          paddingTop: "5px",
-                        }}
+                  <MainLayout
+                    $mainlayoutheight={result?.mainLayout?.layoutHeight}
+                    $mainlayoutwidth={result?.mainLayout?.layoutWidth}
+                  >
+                    {Array.from({
+                      length:
+                        result?.mainLayout?.distribution?.height *
+                        result?.mainLayout?.distribution?.width,
+                    }).map((_) => (
+                      <MainItem
+                        style={{ position: "relative", display: "flex" }}
+                        $mainitemheight={result?.mainLayout?.itemHeight}
+                        $mainitemwidth={result?.mainLayout?.itemWidth}
                       >
-                        {result?.mainLayout?.itemWidth}
-                      </span>
-                      <span
-                        style={{
-                          position: "absolute",
-                          top: "45%",
-                          left: "0",
-                          width: "10%",
-                          height: "10%",
-                          paddingLeft: "5px",
-                        }}
+                        <span
+                          style={{
+                            width: "40%",
+                            height: "100%",
+                            display: "flex",
+							alignItems: "center"
+                          }}
+                        >
+                          {result?.mainLayout?.itemHeight}
+                        </span>
+                        <span
+                          style={{
+                            width: "50%",
+                            height: "100%",
+                            display: "flex",
+                          }}
+                        >
+                          {result?.mainLayout?.itemWidth}
+                        </span>
+                      </MainItem>
+                    ))}
+                  </MainLayout>
+                  <ExtraLayout
+                    $extralayoutheight={result?.extraLayout?.layoutHeight}
+                    $extralayoutwidth={result?.extraLayout?.layoutWidth}
+                  >
+                    {Array.from({
+                      length:
+                        result?.extraLayout?.distribution?.height *
+                        result?.extraLayout?.distribution?.width,
+                    }).map((_) => (
+                      <ExtraItem
+                        style={{ position: "relative", display: "flex" }}
+                        $extraitemheight={result?.extraLayout?.itemHeight}
+                        $extraitemwidth={result?.extraLayout?.itemWidth}
                       >
-                        {result?.mainLayout?.itemHeight}
-                      </span>
-                    </MainItem>
-                  ))}
-                </MainLayout>
-                <ExtraLayout
-                  $extralayoutheight={result?.extraLayout?.layoutHeight}
-                  $extralayoutwidth={result?.extraLayout?.layoutWidth}
-                >
-                  {Array.from({
-                    length:
-                      result?.extraLayout?.distribution?.height *
-                      result?.extraLayout?.distribution?.width,
-                  }).map((_) => (
-                    <ExtraItem
-                      style={{ position: "relative" }}
-                      $extraitemheight={result?.extraLayout?.itemHeight}
-                      $extraitemwidth={result?.extraLayout?.itemWidth}
-                    >
-                      <span
-                        style={{
-                          position: "absolute",
-                          top: "0",
-                          left: "45%",
-                          width: "10%",
-                          height: "10%",
-                          paddingTop: "5px",
-                        }}
-                      >
-                        {result?.extraLayout?.itemWidth}
-                      </span>
-                      <span
-                        style={{
-                          position: "absolute",
-                          top: "45%",
-                          left: "0",
-                          width: "10%",
-                          height: "10%",
-                          paddingLeft: "5px",
-                        }}
-                      >
-                        {result?.extraLayout?.itemHeight}
-                      </span>
-                    </ExtraItem>
-                  ))}
-                </ExtraLayout>
-            </MainContainer>
-			</>
+                        <span
+                          style={{
+							width: "40%",
+                            height: "100%",
+                            display: "flex",
+							alignItems: "center"
+                          }}
+                        >
+                          {result?.extraLayout?.itemHeight}
+                        </span>
+						<span
+						style={{
+							width: "50%",
+                            height: "100%",
+                            display: "flex",
+						}}
+						>
+						{result?.extraLayout?.itemWidth}
+						</span>
+                      </ExtraItem>
+                    ))}
+                  </ExtraLayout>
+                </MainContainer>
+              </Box>
+            )
           )}
         </div>
       </section>
-      <button onClick={generatePDF}>Baixar como PDF</button>
+	  
     </PageContainer>
   );
 };
